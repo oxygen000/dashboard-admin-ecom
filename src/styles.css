@@ -1,3 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
+
+
+:root {
+    --bg-color: #fdfdff /* Light mode background color */;
+    --text-color: #000000; /* Light mode text color */;
+  }
+  
+  .dark {
+    --bg-color: #1e2939 /* Dark mode background color */;
+    --text-color: #ffffff /* Dark mode text color */;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }

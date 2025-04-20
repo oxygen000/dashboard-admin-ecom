@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ThemeComponent } from "../../components/theme/theme.component";
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule, ThemeComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
   isUserOpen= false;
   isNotificationOpen = false;
+
   @Output() toggleSidebarEvent = new EventEmitter<void>();
 
   toggleSidebar() {
@@ -22,4 +24,5 @@ export class HeaderComponent {
   toggleNotification() {
     this.isNotificationOpen = !this.isNotificationOpen;
   }
+  
 }
