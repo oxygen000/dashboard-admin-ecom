@@ -1,48 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, HostBinding } from '@angular/core';
+import { ThemeService } from '../../servers/theme.service';
 
 
 @Component({
     selector: 'app-theme',
-    imports: [CommonModule, MatIconModule],
+    imports: [CommonModule],
     templateUrl: './theme.component.html',
     styleUrls: ['./theme.component.css'],
 })
-export class ThemeComponent  implements OnInit{
-    isDarkMode = false;
-  isBrowser: boolean;
+export class ThemeComponent  {
+  isDarkMode = false;
 
-  constructor(
-    private renderer: Renderer2,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
+  constructor(public themeService: ThemeService) {}
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 
-  ngOnInit(): void {
-    if (this.isBrowser) {
-      const theme = localStorage.getItem('theme');
-      this.isDarkMode = theme === 'dark';
-      this.updateThemeClass();
-    }
+  ngOnInit() {
+    this.themeService.theme$.subscribe((isDark) => {
+      this.isDarkMode = isDark;
+    });
   }
-
-  toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    if (this.isBrowser) {
-      localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
-      this.updateThemeClass();
-    }
-  }
-
-  updateThemeClass(): void {
-    if (this.isDarkMode) {
-      this.renderer.addClass(document.documentElement, 'dark');
-    } else {
-      this.renderer.removeClass(document.documentElement, 'dark');
-    }
-  }
+@HostBinding('class.isDark') get isDark() {
+    return this.themeService.isDarkMode;
+  } 
   
 }

@@ -1,7 +1,7 @@
-<div class="relative min-h-screen">
+<div class="relative min-h-screen ">
     <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
     <app-sidebar [isSidebarOpen]="isSidebarOpen" (closeSidebar)="closeSidebar()"></app-sidebar>
-    <main class="p-4 sm:ml-64">
+    <main class="p-4 sm:ml-64 ">
         <router-outlet></router-outlet>
         <app-footer></app-footer>
     </main>

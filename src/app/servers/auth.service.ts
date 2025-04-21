@@ -5,31 +5,23 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-
-    
-
-
-  private readonly TOKEN_KEY = 'token';
-
   constructor(private router: Router) {}
-
-  
-
-  login(email: string, password: string): boolean {
+  async login(email: string, password: string): Promise<string | null> {
     if (email === 'test@example.com' && password === '123456') {
-      localStorage.setItem(this.TOKEN_KEY, 'fake-token');
-      return true;
+      localStorage.setItem('auth_token', 'your_fake_token_here');
+      return 'your_fake_token_here';
+    } else {
+      return null;
     }
-
-    return false;
+  }
+  logout(): void {
+    localStorage.removeItem('auth_token');
+  this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    return localStorage.getItem('auth_token') !== null;
   }
 
-  logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    this.router.navigate(['/login']);
-  }
+  
 }
