@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, HostBinding } from '@angular/core';
 import { ThemeService } from '../../servers/theme.service';
 
-
 @Component({
-    selector: 'app-theme',
-    imports: [CommonModule],
-    templateUrl: './theme.component.html',
-    styleUrls: ['./theme.component.css'],
+  selector: 'app-theme',
+  imports: [CommonModule],
+  templateUrl: './theme.component.html',
+  styleUrls: ['./theme.component.css'],
 })
-export class ThemeComponent  {
+export class ThemeComponent {
   isDarkMode = false;
 
   constructor(public themeService: ThemeService) {}
@@ -23,8 +22,7 @@ export class ThemeComponent  {
       this.isDarkMode = isDark;
     });
   }
-@HostBinding('class.isDark') get isDark() {
+  @HostBinding('class.isDark') get isDark() {
     return this.themeService.isDarkMode;
-  } 
-  
+  }
 }

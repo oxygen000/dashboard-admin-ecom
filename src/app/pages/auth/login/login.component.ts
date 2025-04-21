@@ -8,7 +8,7 @@ import { AuthService } from '../../../servers/auth.service';
   selector: 'app-login',
   imports: [CommonModule, FormsModule],
   templateUrl: './login.components.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   title = 'Login';
@@ -20,7 +20,10 @@ export class LoginComponent {
   loading: boolean = false;
   showPassword: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -36,7 +39,7 @@ export class LoginComponent {
     if (typeof token === 'string' && token) {
       localStorage.setItem('token', token);
       this.successMessage = 'Login successful!';
-      
+
       setTimeout(() => {
         this.loading = false;
         this.router.navigate(['/dashboard']);

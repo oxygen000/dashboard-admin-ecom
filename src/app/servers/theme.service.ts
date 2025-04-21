@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ThemeService {
   isDarkMode = false;
   private isBrowser: boolean;
-  private themeSubject = new BehaviorSubject<boolean>(false); 
+  private themeSubject = new BehaviorSubject<boolean>(false);
   theme$ = this.themeSubject.asObservable();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {

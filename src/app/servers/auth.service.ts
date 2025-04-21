@@ -16,12 +16,10 @@ export class AuthService {
   }
   logout(): void {
     localStorage.removeItem('auth_token');
-  this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('auth_token') !== null;
   }
-
-  
 }

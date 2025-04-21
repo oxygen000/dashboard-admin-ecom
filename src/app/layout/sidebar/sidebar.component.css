@@ -1,44 +1,44 @@
 .custom-scrollbar {
-    /* For Webkit browsers (Chrome, Safari) */
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background-color: #94a3b8;
-      border-radius: 4px;
-      
-      &:hover {
-        background-color: #64748b;
-      }
-    }
-  
-    /* For Firefox */
-    scrollbar-width: thin;
-    scrollbar-color: #94a3b8 transparent;
-  
+  /* For Webkit browsers (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #94a3b8;
+    border-radius: 4px;
+
     &:hover {
-      scrollbar-color: #64748b transparent;
+      background-color: #64748b;
     }
   }
-  
-  /* Dark mode styles */
-  :host-context(.dark) .custom-scrollbar {
-    &::-webkit-scrollbar-thumb {
-      background-color: #475569;
-      
-      &:hover {
-        background-color: #64748b;
-      }
-    }
-  
-    scrollbar-color: #475569 transparent;
-  
+
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 transparent;
+
+  &:hover {
+    scrollbar-color: #64748b transparent;
+  }
+}
+
+/* Dark mode styles */
+:host-context(.dark) .custom-scrollbar {
+  &::-webkit-scrollbar-thumb {
+    background-color: #475569;
+
     &:hover {
-      scrollbar-color: #64748b transparent;
+      background-color: #64748b;
     }
   }
+
+  scrollbar-color: #475569 transparent;
+
+  &:hover {
+    scrollbar-color: #64748b transparent;
+  }
+}
