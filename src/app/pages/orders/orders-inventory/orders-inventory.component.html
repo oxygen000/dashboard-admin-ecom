@@ -1,1 +1,81 @@
-<p>orders-inventory works!</p>
+<section class="w-full mt-20 p-8 bg-white dark:bg-gray-900">
+  <nav class="text-gray-700 text-sm mb-6" aria-label="Breadcrumb">
+    <ol class="list-reset flex">
+      <a routerLink="/dashboard" class="text-black dark:text-white">Dashboard</a>
+      <li class="mx-2 text-gray-500 dark:text-gray-400">/</li>
+      <li class="text-gray-600 dark:text-gray-300">Orders and Billing</li>
+    </ol>
+  </nav>
+
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Order and Billing Management</h1>
+    <p class="text-gray-600 dark:text-gray-400">
+      Manage your orders, payments, and billing details effectively. Stay updated with payment
+      statuses and track order shipments.
+    </p>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4 overflow-auto">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+      Order and Billing Details
+    </h2>
+    <table class="min-w-full table-auto divide-y divide-gray-200 dark:divide-gray-700">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+            Order ID
+          </th>
+          <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+            Customer
+          </th>
+          <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+            Amount
+          </th>
+          <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+            Payment Status
+          </th>
+          <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+            Invoice Date
+          </th>
+          <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+            Shipping Address
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-sm">
+        <tr *ngFor="let order of orders" class="hover:bg-gray-50 dark:hover:bg-gray-700">
+          <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">{{ order.id }}</td>
+          <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">{{ order.customer }}</td>
+          <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+            {{ order.amount | currency }}
+          </td>
+          <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+            <span
+              [ngClass]="{
+                'text-green-500': order.paymentStatus === 'Paid',
+                'text-yellow-500': order.paymentStatus === 'Pending',
+                'text-red-500': order.paymentStatus === 'Failed',
+              }"
+            >
+              {{ order.paymentStatus }}
+            </span>
+          </td>
+          <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+            {{ order.invoiceDate | date }}
+          </td>
+          <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+            {{ order.shippingAddress }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Payment Status Distribution</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      A pie chart showing the distribution of orders by payment status.
+    </p>
+    <p-chart type="pie" [data]="chartData"></p-chart>
+  </div>
+</section>
