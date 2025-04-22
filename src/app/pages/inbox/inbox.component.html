@@ -24,7 +24,7 @@
       </div>
       <p class="text-sm text-gray-700 dark:text-gray-300 mt-2">{{ message.content }}</p>
       <a
-        routerLink="/inbox/{{ message.id }}"
+        [routerLink]="['/inbox', message.id]"
         class="text-blue-500 hover:text-blue-700 mt-2 inline-block"
         >Open Message</a
       >

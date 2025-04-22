@@ -10,9 +10,42 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
   styleUrl: './inbox-id.component.css',
 })
 export class InboxIdComponent implements OnInit {
-  message: any;
+  sentMessage: any;
   replyContent: string = '';
-  sentMessage: any = null;
+  message = [
+    {
+      id: 1,
+      subject: 'New Task Assignment',
+      sender: 'Ali Mansour',
+      date: new Date('2024-04-15'),
+      senderImage:
+        'https://api.dicebear.com/9.x/micah/svg?seed=Sara&hair=dannyPhantom,fonze,full,mrClean&backgroundColor[]',
+      content:
+        'You have been assigned a new task regarding the upcoming project launch. Please check the task board for more details.',
+      replies: [],
+    },
+    {
+      id: 2,
+      subject: 'Meeting Rescheduled',
+      sender: 'Sara Khaled',
+      date: new Date('2024-04-13'),
+      senderImage:
+        'https://api.dicebear.com/9.x/micah/svg?seed=Katherine&hair=dannyPhantom,fonze,full,mrClean&backgroundColor[]',
+      content:
+        'The team meeting scheduled for next week has been rescheduled to Thursday, April 20th. Please make a note of the change.',
+      replies: [],
+    },
+    {
+      id: 3,
+      subject: 'Important System Update',
+      sender: 'Mohamed Tarek',
+      date: new Date('2024-04-12'),
+      senderImage: 'https://api.dicebear.com/9.x/micah/svg?seed=Jude',
+      content:
+        'A system update is planned for this weekend. Please make sure you back up all important files before Friday.',
+      replies: [],
+    },
+  ];
 
   constructor(private route: ActivatedRoute) {}
 
@@ -22,48 +55,29 @@ export class InboxIdComponent implements OnInit {
   }
 
   loadMessage(id: string | null): void {
-    const messages = [
-      {
-        id: '1',
-        subject: 'New Task Assignment',
-        sender: 'John Doe',
-        date: new Date('2024-04-15'),
-        content:
-          'You have been assigned a new task regarding the upcoming project launch. Please check the task board for more details.',
-      },
-      {
-        id: '2',
-        subject: 'Meeting Rescheduled',
-        sender: 'Sara Ali',
-        date: new Date('2024-04-13'),
-        content:
-          'The team meeting scheduled for next week has been rescheduled to Thursday, April 20th. Please make a note of the change.',
-      },
-      {
-        id: '3',
-        subject: 'Important System Update',
-        sender: 'System Admin',
-        date: new Date('2024-04-12'),
-        content:
-          'A system update is planned for this weekend. Please make sure you back up all important files before Friday.',
-      },
-    ];
-
-    this.message = messages.find((msg) => msg.id === id);
+    this.sentMessage = this.message.find((msg) => msg.id === Number(id));
   }
 
   sendReply(): void {
     if (this.replyContent.trim()) {
-      this.sentMessage = {
-        subject: 'Re: ' + this.message.subject,
+      console.log('Reply Sent:', this.replyContent);
+
+      const reply = {
+        messageId: this.sentMessage.id,
+        replyContent: this.replyContent,
         sender: 'You',
         date: new Date(),
-        content: this.replyContent,
       };
-      console.log('Reply Sent:', this.replyContent);
+      if (!this.sentMessage.replies) {
+        this.sentMessage.replies = [];
+      }
+      this.sentMessage.replies.push(reply);
+
       this.replyContent = '';
+
+      console.log('Reply has been successfully sent.');
     } else {
-      console.log('Reply content is empty');
+      console.log('Please write a reply before sending.');
     }
   }
 }

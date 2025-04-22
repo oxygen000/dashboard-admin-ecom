@@ -13,38 +13,49 @@
     <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Message Detail</h1>
   </div>
 
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-    <div *ngIf="message">
-      <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">{{ message.subject }}</h3>
-      <p class="text-sm text-gray-600 dark:text-gray-400">From: {{ message.sender }}</p>
-      <p class="text-sm text-gray-500 dark:text-gray-400">Date: {{ message.date | date }}</p>
-      <p class="text-sm text-gray-700 dark:text-gray-300 mt-2">{{ message.content }}</p>
-    </div>
-    <div *ngIf="!message">
-      <p class="text-gray-500 dark:text-gray-400">Message not found.</p>
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
+    <div *ngIf="sentMessage">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        {{ sentMessage.subject }}
+      </h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        <strong>From:</strong> {{ sentMessage.sender }}
+      </p>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        <strong>Date:</strong> {{ sentMessage.date | date: 'short' }}
+      </p>
+      <p class="text-gray-700 dark:text-gray-400 mt-4">{{ sentMessage.content }}</p>
+      <div *ngIf="sentMessage?.replies?.length > 0">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mt-6">Replies:</h3>
+        <div *ngFor="let reply of sentMessage.replies" class="mt-4">
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            <strong>{{ reply.sender }}:</strong> {{ reply.replyContent }}
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">{{ reply.date | date: 'short' }}</p>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Reply</h3>
+        <textarea
+          [(ngModel)]="replyContent"
+          placeholder="Type your reply here"
+          class="w-full p-4 border rounded-md text-gray-900 dark:bg-gray-700 dark:text-white"
+        ></textarea>
+      </div>
+
+      <div class="mt-4">
+        <button
+          (click)="sendReply()"
+          class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700"
+        >
+          Send Reply
+        </button>
+      </div>
     </div>
 
-    <div *ngIf="sentMessage" class="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg">
-      <h4 class="text-xl font-semibold text-gray-800 dark:text-white">Your Sent Message</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400">To: {{ sentMessage.sender }}</p>
-      <p class="text-sm text-gray-500 dark:text-gray-400">Date: {{ sentMessage.date | date }}</p>
-      <p class="text-sm text-gray-700 dark:text-gray-300 mt-2">{{ sentMessage.content }}</p>
-    </div>
-
-    <div class="mt-6">
-      <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Reply</h3>
-      <textarea
-        [(ngModel)]="replyContent"
-        rows="4"
-        class="w-full mt-2 p-4 border rounded-lg text-gray-800 dark:text-gray-300 dark:bg-gray-700"
-        placeholder="Write your reply..."
-      ></textarea>
-      <button
-        (click)="sendReply()"
-        class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        Send Reply
-      </button>
+    <div *ngIf="!sentMessage" class="mt-4">
+      <p class="text-gray-600 dark:text-gray-300">Message not found.</p>
     </div>
   </div>
 </section>

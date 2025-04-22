@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-inbox',
   imports: [RouterModule, CommonModule],
   templateUrl: './inbox.component.html',
-  styleUrl: './inbox.component.css',
+  styleUrls: ['./inbox.component.css'],
 })
 export class InboxComponent implements OnInit {
   messages = [
