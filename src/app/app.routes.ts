@@ -5,7 +5,6 @@ import { protectedRoutes } from './routes/protected.routes';
 export const routes: Routes = [
   ...protectedRoutes,
   ...authRoutes,
- 
 
   // fallback route
   {

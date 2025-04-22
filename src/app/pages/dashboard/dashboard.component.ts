@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 
-
-
-
 @Component({
   selector: 'app-dashboard',
   imports: [CommonModule, ChartModule],
@@ -16,13 +13,13 @@ export class DashboardComponent {
     users: 1204,
     tasks: 312,
     notifications: 27,
-    revenue: 12300
+    revenue: 12300,
   };
 
   activityLogs = [
     { user: 'John Doe', action: 'Added new task', time: '2 min ago' },
     { user: 'Sarah', action: 'Completed project', time: '10 min ago' },
-    { user: 'Admin', action: 'Deleted user', time: '1 hour ago' }
+    { user: 'Admin', action: 'Deleted user', time: '1 hour ago' },
   ];
 
   basicData: any;
@@ -35,9 +32,9 @@ export class DashboardComponent {
           label: 'Revenue',
           backgroundColor: '#42A5F5',
           borderColor: '#1E88E5',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        }
-      ]
+          data: [65, 59, 80, 81, 56, 55, 40],
+        },
+      ],
     };
   }
 
@@ -50,10 +47,8 @@ export class DashboardComponent {
       },
       title: {
         display: true,
-        text: 'Revenue Chart'
-      }
-    }
+        text: 'Revenue Chart',
+      },
+    },
   };
-
-  
 }

@@ -1,0 +1,48 @@
+<section class="w-full mt-20 p-8 bg-white dark:bg-gray-900">
+  <nav class="text-gray-700 text-sm mb-6" aria-label="Breadcrumb">
+    <ol class="list-reset flex">
+      <a routerLink="/dashboard" class="text-black dark:text-white">Dashboard</a>
+      <li class="mx-2 text-gray-500 dark:text-gray-400">/</li>
+      <a routerLink="/products" class="text-black dark:text-white">Products</a>
+      <li class="mx-2 text-gray-500 dark:text-gray-400">/</li>
+      <li class="text-gray-600 dark:text-gray-300">Inventory</li>
+    </ol>
+  </nav>
+  <h1 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Inventory</h1>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 overflow-x-auto mb-8">
+    <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
+      <thead>
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+          <th class="px-4 py-2">#</th>
+          <th class="px-4 py-2">Product</th>
+          <th class="px-4 py-2">Category</th>
+          <th class="px-4 py-2">Stock</th>
+          <th class="px-4 py-2">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of inventoryData; index as i"
+          class="border-b border-gray-100 dark:border-gray-700"
+        >
+          <td class="px-4 py-2">{{ i + 1 }}</td>
+          <td class="px-4 py-2">{{ item.product }}</td>
+          <td class="px-4 py-2">{{ item.category }}</td>
+          <td class="px-4 py-2">{{ item.stock }}</td>
+          <td class="px-4 py-2">{{ item.location }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    <h3 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Stock by Category</h3>
+    <p-chart
+      type="pie"
+      [data]="stockPieData"
+      [options]="stockPieOptions"
+      class="h-64 w-full"
+    ></p-chart>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+<section class="w-full mt-20 p-8 bg-white dark:bg-gray-900">
+  <nav class="text-gray-700 text-sm mb-6" aria-label="Breadcrumb">
+    <ol class="list-reset flex">
+      <a routerLink="/dashboard" class="text-black dark:text-white">Dashboard</a>
+      <li class="mx-2 text-gray-500 dark:text-gray-400">/</li>
+      <li class="text-gray-600 dark:text-gray-300">Orders Billing</li>
+    </ol>
+  </nav>
+
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Orders Billing</h1>
+    <p class="text-gray-600 dark:text-gray-400">
+      View and manage your order billing information. Easily manage payment statuses and track
+      orders.
+    </p>
+  </div>
+
+  <!-- جدول الفواتير -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    <div class="mb-4 flex justify-between items-center">
+      <div class="text-lg font-semibold text-gray-800 dark:text-white">Invoices List</div>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Add New Invoice
+      </button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="min-w-full table-auto divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-100 dark:bg-gray-700">
+          <tr>
+            <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+              Invoice ID
+            </th>
+            <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+              Order ID
+            </th>
+            <th class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+              Amount
+            </th>
+            <th
+              class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300 hidden sm:table-cell"
+            >
+              Payment Status
+            </th>
+            <th
+              class="py-2 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300 hidden sm:table-cell"
+            >
+              Invoice Date
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-sm">
+          <tr *ngFor="let invoice of invoices">
+            <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+              {{ invoice.invoiceId }}
+            </td>
+            <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+              {{ invoice.orderId }}
+            </td>
+            <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300">
+              {{ invoice.amount | currency }}
+            </td>
+            <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300 hidden sm:table-cell">
+              <span
+                [ngClass]="{
+                  'text-green-500': invoice.paymentStatus === 'Paid',
+                  'text-yellow-500': invoice.paymentStatus === 'Pending',
+                  'text-red-500': invoice.paymentStatus === 'Failed',
+                }"
+              >
+                {{ invoice.paymentStatus }}
+              </span>
+            </td>
+            <td class="py-3 px-4 border-b text-gray-600 dark:text-gray-300 hidden sm:table-cell">
+              {{ invoice.invoiceDate | date }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

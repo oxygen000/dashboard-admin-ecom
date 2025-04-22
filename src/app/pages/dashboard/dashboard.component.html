@@ -11,58 +11,55 @@
 
   <!-- Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-blue-500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-blue-500">
       <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Users</h2>
       <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">{{ stats.users }}</p>
     </div>
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-green-500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-green-500">
       <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Tasks</h2>
       <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{{ stats.tasks }}</p>
     </div>
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-red-500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-red-500">
       <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Notifications</h2>
-      <p class="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">{{ stats.notifications }}</p>
+      <p class="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">
+        {{ stats.notifications }}
+      </p>
     </div>
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-yellow-500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-4 border-yellow-500">
       <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Revenue</h2>
-      <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">${{ stats.revenue }}</p>
+      <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">
+        ${{ stats.revenue }}
+      </p>
     </div>
   </div>
 
-<!-- Activity Table + Chart -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-  <!-- Recent Activity Table -->
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Recent Activity</h3>
-    <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
-      <thead>
-        <tr>
-          <th class="px-4 py-2">User</th>
-          <th class="px-4 py-2">Action</th>
-          <th class="px-4 py-2">Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let log of activityLogs">
-          <td class="px-4 py-2">{{ log.user }}</td>
-          <td class="px-4 py-2">{{ log.action }}</td>
-          <td class="px-4 py-2">{{ log.time }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Activity Table + Chart -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+    <!-- Recent Activity Table -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Recent Activity</h3>
+      <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">User</th>
+            <th class="px-4 py-2">Action</th>
+            <th class="px-4 py-2">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of activityLogs">
+            <td class="px-4 py-2">{{ log.user }}</td>
+            <td class="px-4 py-2">{{ log.action }}</td>
+            <td class="px-4 py-2">{{ log.time }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Chart (ECharts) -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Monthly Revenue</h3>
+      <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+    </div>
   </div>
-
- <!-- Chart (ECharts) -->
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-  <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Monthly Revenue</h3>
-  <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
-
-</div>
-
-</div>
-
 </section>

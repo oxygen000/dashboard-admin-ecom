@@ -1,0 +1,33 @@
+<section class="w-full mt-20 p-8 bg-white dark:bg-gray-900">
+  <nav class="text-gray-700 text-sm mb-6" aria-label="Breadcrumb">
+    <ol class="list-reset flex">
+      <a routerLink="/dashboard" class="text-black dark:text-white">Dashboard</a>
+      <li class="mx-2 text-gray-500 dark:text-gray-400">/</li>
+      <li class="text-gray-600 dark:text-gray-300">Inbox</li>
+    </ol>
+  </nav>
+
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Inbox</h1>
+    <p class="text-gray-600 dark:text-gray-400">Check your recent messages.</p>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
+    <div *ngFor="let message of messages" class="border-b dark:border-gray-700 py-4">
+      <div class="flex items-center">
+        <img class="w-10 h-10 rounded-full" [src]="message.senderImage" alt="Sender Image" />
+        <div class="ml-4">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">{{ message.subject }}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">From: {{ message.sender }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Date: {{ message.date | date }}</p>
+        </div>
+      </div>
+      <p class="text-sm text-gray-700 dark:text-gray-300 mt-2">{{ message.content }}</p>
+      <a
+        routerLink="/inbox/{{ message.id }}"
+        class="text-blue-500 hover:text-blue-700 mt-2 inline-block"
+        >Open Message</a
+      >
+    </div>
+  </div>
+</section>
